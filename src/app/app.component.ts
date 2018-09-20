@@ -15,15 +15,6 @@ wjcXlsx.useJSZip(JSZip); */
 })
 export class AppComponent {
   title = 'app';
-
-
-
-
-
-
-
-  
-
   data: AOA = [ [1, 2], [3, 4] ];
 	wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
 	fileName: string = 'SheetJS.xlsx';
@@ -43,7 +34,7 @@ export class AppComponent {
 			const ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
 			/* save data */
-      this.data = <AOA>(XLSX.utils.sheet_to_json(ws, {header: 1}));
+      this.data = <AOA>(XLSX.utils.sheet_to_json(ws, {header: 1, raw:true, defval:''}));
       console.log(this.data)
 		};
     reader.readAsBinaryString(target.files[0]);
@@ -60,5 +51,9 @@ export class AppComponent {
 
 		/* save to file */
 		XLSX.writeFile(wb, this.fileName);
+	}
+	
+	console() {
+		console.log(this.data)
 	}
 }

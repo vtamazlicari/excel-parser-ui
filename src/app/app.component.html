@@ -1,13 +1,13 @@
 <div style="text-align:center">
 
-
   <input type="file" (change)="onFileChange($event)" multiple="false" />
-	<table class="sjs-table">
-		<tr *ngFor="let row of data">
-			<td *ngFor="let val of row">
-				{{val}}
+	<table class="sjs-table" style="border:2">
+		<tr *ngFor="let row of data ; let idr = index" >
+			<td  *ngFor="let val of row ; let idv = index">
+				<input value="value" [(ngModel)]="data[idr][idv]" [ngModelOptions]="{ updateOn: 'blur' }" size="data[idr][idv].length()">
 			</td>
 		</tr>
 	</table>
 	<button (click)="export()">Export!</button>
+	<button (click)="console()">Console log</button>
 
