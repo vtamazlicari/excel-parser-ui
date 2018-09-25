@@ -31,7 +31,7 @@ export class AppComponent {
 
 			/* grab first sheet */
 			const wsname: string = wb.SheetNames[0];
-			const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+			let ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
 			/* save data */
       this.data = <AOA>(XLSX.utils.sheet_to_json(ws, {header: 1, raw:true, defval:''}));
@@ -43,7 +43,14 @@ export class AppComponent {
 
 	export(): void {
 		/* generate worksheet */
-		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
+		const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.data);
+		ws['!merges']=[
+			{s:{r:1,c:3},e:{r:1,c:12}} ,
+			{s:{r:1,c:13},e:{r:1,c:27}},
+			{s:{r:2,c:13},e:{r:2,c:17}},
+			{s:{r:2,c:18},e:{r:2,c:20}},
+			{s:{r:2,c:21},e:{r:2,c:27}},
+		]
 
 		/* generate workbook and add the worksheet */
 		const wb: XLSX.WorkBook = XLSX.utils.book_new();
