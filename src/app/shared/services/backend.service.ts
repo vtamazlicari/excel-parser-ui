@@ -14,11 +14,8 @@ export class BackendService {
   constructor(private http: HttpClient) { }
 
   getHeaders() {
-    let ContentType = 'application/json';
     return {
-      headers: new HttpHeaders({
-        ContentType
-      })
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
     }
   }
 

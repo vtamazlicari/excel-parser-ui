@@ -58,7 +58,7 @@ export class ProjectsPageComponent implements OnInit {
       }
       projects.push(new Project(projectData))
     }
-    return JSON.stringify(projects);
+    return projects.splice(0, 2);
   }
 
   buildObject() {
@@ -66,15 +66,14 @@ export class ProjectsPageComponent implements OnInit {
   }
 
   postFile() {
-    let file = 'TestFileAngular';
-    let version = 'TestFileAngular_v2';
+    let file = 'TestFileAgainStringify';
+    let version = 'TestFileAngular_v9';
     let data = this.getBuiltObject();
     let payload = { file, version, data };
-    debugger
 
-    this.backendService.post('projects', payload).pipe(
+    this.backendService.post('projects', JSON.stringify(payload)).pipe(
       catchError((error) => throwError(error))
-    ).subscribe((response) => { console.log(response) })
+    ).subscribe((response) => { console.log(response); })
 
   }
 
