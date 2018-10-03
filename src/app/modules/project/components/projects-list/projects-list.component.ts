@@ -19,7 +19,7 @@ export class ProjectsListComponent implements OnInit {
     this.backendService.get('projects').pipe(
       takeUntil(this.destroy$),
       catchError((error) => throwError(error))
-    ).subscribe((projects) => { this.importedProjects = projects.data; console.log(this.importedProjects) });
+    ).subscribe((projects) => this.importedProjects = projects.data);
   }
 
 }

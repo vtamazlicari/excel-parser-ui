@@ -60,10 +60,6 @@ export class ProjectsPageComponent implements OnInit {
     return projects.splice(0, 2);
   }
 
-  buildObject() {
-    console.log(this.getBuiltObject());
-  }
-
   postFile() {
     let file = 'TestFileAgainStringify';
     let version = 'TestFileAngular_v9';
@@ -94,10 +90,6 @@ export class ProjectsPageComponent implements OnInit {
 
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
-  }
-
-  console() {
-    console.log(this.data)
   }
 
 }
