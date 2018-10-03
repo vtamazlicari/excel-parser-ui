@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, takeUntil } from 'rxjs/operators';
+import { throwError, Subject } from 'rxjs';
 
 import { BackendService } from '../../../../shared/services/backend.service';
 
@@ -11,16 +11,15 @@ import { BackendService } from '../../../../shared/services/backend.service';
 })
 export class ProjectsListComponent implements OnInit {
   importedProjects = [];
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private backendService: BackendService) { }
 
   ngOnInit() {
     this.backendService.get('projects').pipe(
+      takeUntil(this.destroy$),
       catchError((error) => throwError(error))
-    ).subscribe((projects) => {
-      this.importedProjects = projects;
-      console.log(this.importedProjects);
-    });
+    ).subscribe((projects) => this.importedProjects = projects);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, takeUntil } from 'rxjs/operators';
+import { throwError, Subject } from 'rxjs';
 import * as XLSX from 'xlsx';
 
 import { BackendService } from '../../../../shared/services/backend.service';
@@ -14,6 +14,7 @@ type AOA = any[][];
   styleUrls: ['./projects-page.component.css']
 })
 export class ProjectsPageComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private backendService: BackendService) { }
 
@@ -70,6 +71,7 @@ export class ProjectsPageComponent implements OnInit {
     let payload = { file, version, data };
 
     this.backendService.post('projects', JSON.stringify(payload)).pipe(
+      takeUntil(this.destroy$),
       catchError((error) => throwError(error))
     ).subscribe((response) => { console.log(response); })
 
