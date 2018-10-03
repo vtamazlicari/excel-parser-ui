@@ -1,6 +1,16 @@
-<input type="file"
-       (change)="onFileChange($event)"
-       multiple="false" />
+<div class="input-group mb-3 container">
+
+  <div class="custom-file">
+    <input type="file"
+           class="custom-file-input"
+           id="inputGroupFile01"
+           (change)="onFileChange($event)"
+           multiple="false">
+    <label class="custom-file-label"
+           for="inputGroupFile01">Choose file</label>
+  </div>
+</div>
+<app-projects-list></app-projects-list>
 <table class="sjs-table"
        style="border:2">
   <tr *ngFor="let row of data ; let idr = index">
@@ -12,7 +22,11 @@
     </td>
   </tr>
 </table>
-<button (click)="export()">Export!</button>
-<button (click)="console()">Console log</button>
-<button (click)="buildObject()">Build Object</button>
-<button (click)="postFile()">Post File</button>
+<button class="btn btn-success"
+        (click)="export()">Export!</button>
+<button class="btn btn-success"
+        (click)="console()">Console log</button>
+<button class="btn btn-success"
+        (click)="buildObject()">Build Object</button>
+<button class="btn btn-success"
+        (click)="postFile()">Post File</button>

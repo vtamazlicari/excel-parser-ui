@@ -1,0 +1,14 @@
+<div class="container"
+     *ngIf="importedProjects">
+  <div class="card-columns">
+    <div class="card"
+         *ngFor="let project of importedProjects">
+      <div class="card-body">
+        <h4 class="card-title">{{project.name}}</h4>
+        <div *ngFor="let versionTitle of project.version">
+          <button class="btn btn-light">{{versionTitle}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

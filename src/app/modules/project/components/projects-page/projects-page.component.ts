@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../../../../shared/models/project';
-import { map, catchError } from 'rxjs/operators';
-
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import * as XLSX from 'xlsx';
 
 import { BackendService } from '../../../../shared/services/backend.service';
-import { throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Project } from '../../../../shared/models/project';
 
 type AOA = any[][];
 
@@ -17,7 +15,7 @@ type AOA = any[][];
 })
 export class ProjectsPageComponent implements OnInit {
 
-  constructor(private backendService: BackendService, private http: HttpClient) { }
+  constructor(private backendService: BackendService) { }
 
   ngOnInit() {
   }

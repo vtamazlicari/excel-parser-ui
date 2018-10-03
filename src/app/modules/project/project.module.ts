@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProjectsPageComponent } from './components/projects-page/projects-page.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProjectsListComponent } from './components/projects-list/projects-list.component';
 
 @NgModule({
   imports: [
@@ -10,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [ProjectsPageComponent],
-  exports: [ProjectsPageComponent]
+  declarations: [ProjectsPageComponent, ProjectsListComponent],
+  exports: [ProjectsPageComponent, ProjectsListComponent]
 })
 export class ProjectModule { }
