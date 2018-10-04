@@ -57,7 +57,7 @@ export class ProjectsPageComponent implements OnInit {
       }
       projects.push(new Project(projectData))
     }
-    return projects.splice(0, 2);
+    return projects;
   }
 
   postFile() {
