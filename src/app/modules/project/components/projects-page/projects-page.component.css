@@ -1,0 +1,12 @@
+
+.App-panel {
+  margin: 0 48pt;
+  text-align: center;
+}
+.App-panel .wj-control {
+  display: inline-block;
+  width: 100%;
+  min-width: 400px;
+  height: 500px;
+  vertical-align: top;
+}

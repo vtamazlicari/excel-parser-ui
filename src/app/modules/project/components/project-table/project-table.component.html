@@ -1,0 +1,22 @@
+<table class="sjs-table"
+       style="border:2">
+  <tr>
+    <td *ngFor="let row of data[0] ; let nrCol = index">
+      <button class="null_style_button" (click)="addColumn(nrCol)"><i class="fas fa-plus-circle column_add_button"></i></button>
+      <button class="null_style_button" (click)="deleteColumn(nrCol)"><i class="fas fa-minus-circle row_delete_button"></i></button>
+    </td>
+  </tr>
+  <tr *ngFor="let row of data ; let idr = index">
+    <td *ngFor="let val of row ; let idv = index">
+      <div class="d-flex flex-row table_item">
+          <button class="null_style_button" *ngIf="idv==0" (click)="addRow(idr)"><i class="fas fa-plus-circle row_add_button"></i></button>
+          <button class="null_style_button" *ngIf="idv==0" (click)="deleteRow(idr)"><i class="fas fa-minus-circle row_delete_button"></i></button>
+        <input value="value"
+               [(ngModel)]="data[idr][idv]"
+               [ngModelOptions]="{ updateOn: 'blur' }"
+               size="data[idr][idv].length()">
+
+      </div>
+    </td>
+  </tr>
+</table>

@@ -9,6 +9,9 @@ import { AppComponent } from './app.component';
 import { ProjectModule } from './modules/project/project.module';
 import { SharedModule } from './shared/shared.module';
 import {CoreModule} from './core/core.module';
+import {WjGridModule} from '../../node_modules/wijmo/wijmo.angular2.grid';
+import {WjChartModule} from '../../node_modules/wijmo/wijmo.angular2.chart';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import {CoreModule} from './core/core.module';
     SharedModule,
     HttpModule,
     HttpClientModule,
-    CoreModule
+    CoreModule,
+    WjGridModule,
+    WjChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,5 @@
+
+
 <div class="input-group mb-3 container">
 
   <div class="custom-file">
@@ -10,19 +12,16 @@
            for="inputGroupFile01">Choose file</label>
   </div>
 </div>
-<app-projects-list></app-projects-list>
-<table class="sjs-table"
-       style="border:2">
-  <tr *ngFor="let row of data ; let idr = index">
-    <td *ngFor="let val of row ; let idv = index">
-      <input value="value"
-             [(ngModel)]="data[idr][idv]"
-             [ngModelOptions]="{ updateOn: 'blur' }"
-             size="data[idr][idv].length()">
-    </td>
-  </tr>
-</table>
-<button class="btn btn-success mt-2 mb-2 mr-2"
-        (click)="export()">Export!</button>
-<button class="btn btn-success mt-2 mb-2 mr-2"
-        (click)="postFile()">Post File</button>
+  <app-projects-list></app-projects-list>
+
+  <!--<wj-flex-grid [itemsSource]="data"></wj-flex-grid>-->
+
+  <app-project-table [data]="data"></app-project-table>
+
+  <div class="App-panel" *ngIf="data.length > 2">
+
+    <button class="btn btn-success mt-2 mb-2 mr-2"
+            (click)="export()">Export!</button>
+    <button class="btn btn-success mt-2 mb-2 mr-2"
+            (click)="postFile()">Post File</button>
+  </div>

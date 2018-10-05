@@ -22,6 +22,7 @@ export class ProjectsPageComponent implements OnInit {
   }
 
   data: AOA = [[], []];
+  jsonData;
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   fileName: string = 'SheetJS.xlsx';
 
@@ -41,23 +42,23 @@ export class ProjectsPageComponent implements OnInit {
 
       /* save data */
       this.data = <AOA>(XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, defval: '' }));
-      console.log(this.data.slice(3))
+      console.log(this.data);
     };
     reader.readAsBinaryString(target.files[0]);
-
   }
 
   getBuiltObject() {
     let projects = [];
     let projectData = [];
     let value = this.data.slice(3);
+    console.log(value);
     for (let i in value) {
       for (let j in value[i]) {
         projectData.push(value[i][j])
       }
       projects.push(new Project(projectData))
     }
-    return projects.splice(0, 2);
+    return projects;
   }
 
   postFile() {
@@ -66,7 +67,7 @@ export class ProjectsPageComponent implements OnInit {
     let data = this.getBuiltObject();
     let payload = { file, version, data };
 
-    this.backendService.post('projects', JSON.stringify(payload)).pipe(
+    this.backendService.post('projects', payload).pipe(
       takeUntil(this.destroy$),
       catchError((error) => throwError(error))
     ).subscribe((response) => { console.log(response); })
