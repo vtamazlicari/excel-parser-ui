@@ -3,18 +3,19 @@
   background: none;
   color: inherit;
   border: none;
-  padding: 0;
   font: inherit;
   outline: inherit;
   width: 16px;
+  padding: 0;
+}
+
+.add_row {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .row_add_button {
   color: red;
-}
-
-.row_delete_button {
-  padding-left: 1px;
 }
 
 .column_add_button {
@@ -24,3 +25,41 @@
 .row_nr {
   border: 1px solid black;
 }
+
+.cell {
+  border: none;
+  padding: 0;
+  height: 35px;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: beige;
+}
+
+.cell:focus {
+  outline: 0;
+}
+
+.cell_item {
+ padding: 2px;
+  height: auto;
+  text-align: center;
+  vertical-align: inherit;
+  background-color: beige;
+}
+
+.add_remote_cell {
+  background-color: antiquewhite;
+}
+
+.mwlResizable {
+  box-sizing: border-box;
+}
+
+.example-container {
+  max-height: 600px;
+  width: auto;
+  overflow: auto;
+  margin: 20px 30px;
+}
+
+

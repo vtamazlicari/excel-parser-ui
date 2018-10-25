@@ -5,6 +5,9 @@ import {LoggerInterceptorService} from './interceptors/logger-interceptor.servic
 import {ErrorInterceptorService} from './interceptors/error-interceptor.service';
 import {AlertService} from '../shared/services/alert/alert.service';
 import {InitService} from './services/init.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import {RouterModule} from '@angular/router';
 
 export function initAppFactory(initService: InitService) {
   return () => initService.getConfigurations();
@@ -12,9 +15,11 @@ export function initAppFactory(initService: InitService) {
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
-  declarations: [],
+  declarations: [NavbarComponent, LayoutComponent],
+  exports: [NavbarComponent, LayoutComponent],
   providers: [
     {
       provide: APP_INITIALIZER,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { catchError, takeUntil } from 'rxjs/operators';
 import { throwError, Subject } from 'rxjs';
 import * as XLSX from 'xlsx';
@@ -22,8 +22,6 @@ export class ProjectsPageComponent implements OnInit {
   }
 
   data: AOA = [[], []];
-  jsonData;
-  wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   fileName: string = 'SheetJS.xlsx';
 
   onFileChange(evt: any) {
@@ -32,15 +30,11 @@ export class ProjectsPageComponent implements OnInit {
     if (target.files.length !== 1) throw new Error('Cannot use multiple files');
     const reader: FileReader = new FileReader();
     reader.onload = (e: any) => {
-      /* read workbook */
       const bstr: string = e.target.result;
       const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary', cellDates: true, cellNF: false, cellText: false });
-
-      /* grab first sheet */
+      console.log(wb);
       const wsname: string = wb.SheetNames[0];
       let ws: XLSX.WorkSheet = wb.Sheets[wsname];
-
-      /* save data */
       this.data = <AOA>(XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, defval: '' }));
       console.log(this.data);
     };
@@ -62,16 +56,15 @@ export class ProjectsPageComponent implements OnInit {
   }
 
   postFile() {
-    let file = 'TestFileAgainStringify';
-    let version = 'TestFileAngular_v9';
-    let data = this.getBuiltObject();
-    let payload = { file, version, data };
+    const file = 'TestFileAgainStringify';
+    const version = 'TestFileAngular_v9';
+    const data = this.data;
+    const payload = { file, version, data };
 
     this.backendService.post('projects', payload).pipe(
       takeUntil(this.destroy$),
       catchError((error) => throwError(error))
-    ).subscribe((response) => { console.log(response); })
-
+    ).subscribe((response) => { console.log(response); });
   }
 
   export(): void {
@@ -83,7 +76,7 @@ export class ProjectsPageComponent implements OnInit {
       { s: { r: 2, c: 13 }, e: { r: 2, c: 17 } },
       { s: { r: 2, c: 18 }, e: { r: 2, c: 20 } },
       { s: { r: 2, c: 21 }, e: { r: 2, c: 27 } },
-    ]
+    ];
 
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();

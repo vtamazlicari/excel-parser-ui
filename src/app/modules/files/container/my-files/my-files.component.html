@@ -1,0 +1,18 @@
+<div class="container"
+     *ngIf="importedProjects.length">
+  <accordion>
+      <accordion-group heading="Load Existing Project">
+      <div class="card-columns">
+        <div class="card"
+             *ngFor="let project of importedProjects">
+          <div class="card-body">
+            <h4 class="card-title">{{project.name}}</h4>
+            <div *ngFor="let versionTitle of project.version">
+              <button class="btn btn-light mb-2">{{versionTitle}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </accordion-group>
+  </accordion>
+</div>

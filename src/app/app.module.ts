@@ -11,11 +11,13 @@ import { SharedModule } from './shared/shared.module';
 import {CoreModule} from './core/core.module';
 import {WjGridModule} from '../../node_modules/wijmo/wijmo.angular2.grid';
 import {WjChartModule} from '../../node_modules/wijmo/wijmo.angular2.chart';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {appRoutes} from './app.routes';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     CoreModule,
     WjGridModule,
-    WjChartModule
+    WjChartModule,
+    appRoutes
   ],
   providers: [],
   bootstrap: [AppComponent]

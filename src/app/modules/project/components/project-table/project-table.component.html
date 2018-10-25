@@ -1,22 +1,32 @@
-<table class="sjs-table"
-       style="border:2">
-  <tr>
-    <td *ngFor="let row of data[0] ; let nrCol = index">
-      <button class="null_style_button" (click)="addColumn(nrCol)"><i class="fas fa-plus-circle column_add_button"></i></button>
-      <button class="null_style_button" (click)="deleteColumn(nrCol)"><i class="fas fa-minus-circle row_delete_button"></i></button>
-    </td>
-  </tr>
-  <tr *ngFor="let row of data ; let idr = index">
-    <td *ngFor="let val of row ; let idv = index">
-      <div class="d-flex flex-row table_item">
-          <button class="null_style_button" *ngIf="idv==0" (click)="addRow(idr)"><i class="fas fa-plus-circle row_add_button"></i></button>
-          <button class="null_style_button" *ngIf="idv==0" (click)="deleteRow(idr)"><i class="fas fa-minus-circle row_delete_button"></i></button>
-        <input value="value"
-               [(ngModel)]="data[idr][idv]"
-               [ngModelOptions]="{ updateOn: 'blur' }"
-               size="data[idr][idv].length()">
+<div class="example-container mat-elevation-z8">
+  <table class="table table-bordered">
+    <tr>
+      <th class="add_remote_cell"></th>
+      <th *ngFor="let row of data[0] ; let nrCol = index"
+          class="add_remote_cell"
+          mwlResizable
+          [enableGhostResize]="true"
+          [resizeEdges]="{bottom: true, right: true, top: true, left: true}"
+          (resizeEnd)="onResizeEnd($event)">
+          <button class="null_style_button" (click)="addColumn(nrCol)"><i class="fas fa-plus-circle column_add_button"></i></button>
+          <button class="null_style_button" (click)="deleteColumn(nrCol)"><i class="fas fa-minus-circle row_delete_button"></i></button>
+      </th>
+    </tr>
+    <tr *ngFor="let row of data ; let idr = index">
+      <th class="add_remote_cell add_row" colspan="2" >
+        <button class="null_style_button" (click)="addRow(idr)"><i class="fas fa-plus-circle row_add_button"></i></button>
+        <button class="null_style_button" (click)="deleteRow(idr)"><i class="fas fa-minus-circle row_delete_button"></i></button>
+      </th>
+      <td *ngFor="let val of row ; let idv = index" class="cell_item">
+        <div class="d-flex flex-row table_item">
 
-      </div>
-    </td>
-  </tr>
-</table>
+          <input value="value"
+                 [(ngModel)]="data[idr][idv]"
+                 [ngModelOptions]="{ updateOn: 'blur' }"
+                 size="data[idr][idv].length()"
+                 class="cell">
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

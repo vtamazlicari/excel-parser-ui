@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import { ResizeEvent } from 'angular-resizable-element';
 
 @Component({
   selector: 'app-project-table',
@@ -12,6 +13,10 @@ export class ProjectTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onResizeEnd(event: ResizeEvent): void {
+    console.log('Element was resized', event);
   }
 
   addColumn(columnNr) {

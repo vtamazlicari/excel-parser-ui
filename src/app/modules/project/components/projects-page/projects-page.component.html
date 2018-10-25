@@ -1,22 +1,19 @@
 
+<div class="layout_content">
+  <div class="input-group mb-3 container">
 
-<div class="input-group mb-3 container">
-
-  <div class="custom-file">
-    <input type="file"
-           class="custom-file-input"
-           id="inputGroupFile01"
-           (change)="onFileChange($event)"
-           multiple="false">
-    <label class="custom-file-label"
-           for="inputGroupFile01">Choose file</label>
+    <div class="custom-file">
+      <input type="file"
+             class="custom-file-input"
+             id="inputGroupFile01"
+             (change)="onFileChange($event)"
+             multiple="false">
+      <label class="custom-file-label"
+             for="inputGroupFile01">Choose file</label>
+    </div>
   </div>
-</div>
-  <app-projects-list></app-projects-list>
 
-  <!--<wj-flex-grid [itemsSource]="data"></wj-flex-grid>-->
-
-  <app-project-table [data]="data"></app-project-table>
+  <app-project-table [data]="data" *ngIf="data.length > 2"></app-project-table>
 
   <div class="App-panel" *ngIf="data.length > 2">
 
@@ -25,3 +22,5 @@
     <button class="btn btn-success mt-2 mb-2 mr-2"
             (click)="postFile()">Post File</button>
   </div>
+</div>
+
