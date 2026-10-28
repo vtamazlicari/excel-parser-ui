@@ -1,27 +1,39 @@
-# Parser
+# Excel Parser UI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+An Angular 6 front end, which can also run as an Electron desktop app, for importing project-health spreadsheets and sending them to a backend API.
 
-## Development server
+## What it does
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. **Import an Excel file.** Pick an `.xlsx` file. The first sheet is read in the browser with [SheetJS (`xlsx`)](https://github.com/SheetJS/sheetjs) and shown as an editable table.
+2. **Edit cells inline.** Every cell is an input, so you can fix values before you send them.
+3. **Post to the backend.** **Post File** skips the first 3 header rows and maps each remaining row onto a `Project` model ([src/app/shared/models/project.ts](src/app/shared/models/project.ts)), which covers the project code, client, initial-phase checklist, team/customer/practices scores, statuses and evolution. It then `POST`s the result to `/projects`.
+4. **Export back to Excel.** **Export!** writes the current table to `SheetJS.xlsx` and keeps the merged header cells.
+5. **Browse existing projects.** On load, the app calls `GET /projects` and lists the imported projects and their versions under "Load Existing Project".
 
-## Code scaffolding
+HTTP calls go through a shared `BackendService`, which has logger and error interceptors. Errors appear as alerts.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Backend
 
-## Build
+The API base URL is set in [src/environments/environment.ts](src/environments/environment.ts):
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```ts
+backend_url: 'http://localhost:80/api/v1'
+```
 
-## Running unit tests
+The backend must be running for the project list and **Post File** to work.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Running
 
-## Running end-to-end tests
+```bash
+npm install
+npm start              # dev server at http://localhost:4200
+npm run electron       # build, then open in an Electron window
+npm run electron-aot   # production (AOT) build, then open in Electron
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Other commands
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- `npm run build`: build into `dist/parser/`
+- `npm test`: run unit tests (Karma)
+- `npm run e2e`: run end-to-end tests (Protractor)
+- `npm run lint`: lint the code
